@@ -8,11 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate
+{
 
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var answerPickerView: UIPickerView!
     @IBOutlet weak var questionLabel: UILabel!
+    @IBAction func submitButtonPressed(_ sender: Any) {
+        var alert : UIAlertController
+        if CardCollection.instance.checkAnswer(answerPickerView.selectedRow(inComponent: 0))
+        {
+            alert = UIAlertController(title: "Correct", message: "Correct Answer!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "YAY!", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true)
+        }
+        else
+        {
+            alert = UIAlertController(title: "Incorrect", message: "Incorrect Answer.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Aww.", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true)
+            
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCardUI()
@@ -50,5 +67,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     
+ 
+   
 }
 
