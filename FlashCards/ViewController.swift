@@ -29,6 +29,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             self.present(alert, animated: true)
             
         }
+        CardCollection.instance.nextQuestion()
+        setupCardUI()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,7 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     {
         questionTextView.text = CardCollection.instance.currentCard.question
         questionLabel.text = "Question: \(CardCollection.instance.currentIndex + 1)/\(CardCollection.instance.cards.count)"
+        answerPickerView.reloadAllComponents()
     }
     // Pickerview Data Source
     // returns the number of 'columns' to display.
@@ -65,6 +68,8 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return CardCollection.instance.currentCard.options[row]
     }
+    
+
     
     
  
